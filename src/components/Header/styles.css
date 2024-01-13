@@ -1,10 +1,10 @@
 .navbar {
+    /* width: 100%; */
     background-color: var(--theme);
     padding: 0.5rem 1.5rem;
     position: sticky;
     top: 0;
     left: 0;
-    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -16,4 +16,14 @@
     font-size: 1rem;
     margin: 0;
     padding: 1rem;
+}
+
+.link {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.link:hover {
+    opacity: 1;
+    transition: all 0.3s;
 }

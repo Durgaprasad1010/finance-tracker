@@ -11,7 +11,7 @@ function Header
     return (
         <div className='navbar'>
             <p className='logo'>Financely.</p>
-            <p onClick={logoutFnc}>Logout</p>
+            <p className='logo link' onClick={logoutFnc}>Logout</p>
 
         </div>
     )
