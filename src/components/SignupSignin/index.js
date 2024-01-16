@@ -11,6 +11,7 @@ function SignupSigninComponent() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setconfirmPassword] = useState("")
+    const [loginForm, setLoginForm] = useState(false)
 
     const [loading, setLoading] = useState(false)
 
@@ -61,24 +62,65 @@ function SignupSigninComponent() {
         }
     }
 
+    function loginUsingEmail() {
+        console.log("Email", email)
+        console.log("Password", password)
+
+    }
+
+
+
+    function createDoc(user) {
+        // Make sure that the doc with the uid doesn't exist
+        // Create a doc
+    }
+
     return (
-        <div className='signup-wrapper'>
-            <h2 className='title'>Sign Up on <span style={{ color: "var(--theme)" }}>Financely.</span></h2>
-            <form>
-                <Input type="text" label={"Full Name"} state={name} setState={setName} placeholder="John Doe" />
 
-                <Input type="email" label={"Email"} state={email} setState={setEmail} placeholder="Johndoe@gmail.com" />
+        <>
+            {loginForm ?
+                <div className='signup-wrapper'>
+                    <h2 className='title'>Login on <span style={{ color: "var(--theme)" }}>Financely.</span></h2>
+                    <form>
 
-                <Input type="password" label={"Password"} state={password} setState={setPassword} placeholder="Johndoe@123" />
-                <Input type="password" label={"Confirm Password"} state={confirmPassword} setState={setconfirmPassword} placeholder="Johndoe@123" />
+                        <Input type="email" label={"Email"} state={email} setState={setEmail} placeholder="Johndoe@gmail.com" />
 
-                <Button disabled={loading} text={loading ? "Loading..." : "Signup Using Email and Password"} onClick={signupWithEmail} />
+                        <Input type="password" label={"Password"} state={password} setState={setPassword} placeholder="Johndoe@123" />
 
-                <p style={{ margin: 0, textAlign: "center" }}>or</p>
 
-                <Button text={loading ? "Loading..." : "Signup Using Google"} blue={true} />
-            </form>
-        </div>
+                        <Button disabled={loading} text={loading ? "Loading..." : "Login Using Email and Password"} onClick={loginUsingEmail} />
+
+                        <p className='p-login'>or</p>
+
+                        <Button text={loading ? "Loading..." : "Login Using Google"} blue={true} />
+
+                        <p className='p-login'>Or Don't Have An Account Already? Click Here</p>
+
+                    </form>
+                </div>
+                :
+                <div className='signup-wrapper'>
+                    <h2 className='title'>Sign Up on <span style={{ color: "var(--theme)" }}>Financely.</span></h2>
+                    <form>
+                        <Input type="text" label={"Full Name"} state={name} setState={setName} placeholder="John Doe" />
+
+                        <Input type="email" label={"Email"} state={email} setState={setEmail} placeholder="Johndoe@gmail.com" />
+
+                        <Input type="password" label={"Password"} state={password} setState={setPassword} placeholder="Johndoe@123" />
+                        <Input type="password" label={"Confirm Password"} state={confirmPassword} setState={setconfirmPassword} placeholder="Johndoe@123" />
+
+                        <Button disabled={loading} text={loading ? "Loading..." : "Signup Using Email and Password"} onClick={signupWithEmail} />
+
+                        <p style={{ margin: 0, textAlign: "center" }}>or</p>
+
+                        <Button text={loading ? "Loading..." : "Signup Using Google"} blue={true} />
+
+                        <p style={{ margin: 0, textAlign: "center" }}>Or Have An Account Already? Click Here</p>
+                    </form>
+                </div>}
+        </>
+
+
     )
 }
 
