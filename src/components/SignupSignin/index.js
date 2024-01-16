@@ -3,8 +3,9 @@ import './styles.css'
 import Input from '../Input'
 import Button from '../Button'
 import { toast } from 'react-toastify'
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../firebase'
+import { useNavigate } from 'react-router-dom'
 
 function SignupSigninComponent() {
     const [name, setName] = useState("")
@@ -14,6 +15,8 @@ function SignupSigninComponent() {
     const [loginForm, setLoginForm] = useState(false)
 
     const [loading, setLoading] = useState(false)
+
+    const navigate = useNavigate()
 
 
     function signupWithEmail() {
@@ -39,6 +42,8 @@ function SignupSigninComponent() {
                         setEmail("")
                         setPassword("")
                         setconfirmPassword("")
+                        createDoc(user)
+                        navigate("/dashboard")
                         // ...
                     })
                     .catch((error) => {
@@ -65,6 +70,28 @@ function SignupSigninComponent() {
     function loginUsingEmail() {
         console.log("Email", email)
         console.log("Password", password)
+
+        if (email != "" && password != "") {
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                    toast.success("User logged In Successfully!")
+                    console.log("Logged In user => ", user)
+                    navigate("/dashboard")
+
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    toast.error(error.message)
+                });
+        } else {
+            toast.error("All fields are mandatory!")
+        }
+
+
 
     }
 
@@ -94,7 +121,10 @@ function SignupSigninComponent() {
 
                         <Button text={loading ? "Loading..." : "Login Using Google"} blue={true} />
 
-                        <p className='p-login'>Or Don't Have An Account Already? Click Here</p>
+                        <p className='p-login'
+                            style={{ cursor: "pointer" }}
+                            onClick={() => setLoginForm(!loginForm)}
+                        >Or Don't Have An Account Already? Click Here</p>
 
                     </form>
                 </div>
@@ -111,11 +141,14 @@ function SignupSigninComponent() {
 
                         <Button disabled={loading} text={loading ? "Loading..." : "Signup Using Email and Password"} onClick={signupWithEmail} />
 
-                        <p style={{ margin: 0, textAlign: "center" }}>or</p>
+                        <p className='p-login'>or</p>
 
                         <Button text={loading ? "Loading..." : "Signup Using Google"} blue={true} />
 
-                        <p style={{ margin: 0, textAlign: "center" }}>Or Have An Account Already? Click Here</p>
+                        <p className='p-login'
+                            style={{ cursor: "pointer" }}
+                            onClick={() => setLoginForm(!loginForm)}
+                        >Or Have An Account Already? Click Here</p>
                     </form>
                 </div>}
         </>
