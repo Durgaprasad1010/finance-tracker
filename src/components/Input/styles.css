@@ -9,8 +9,8 @@
 }
 
 .custom-input {
-    border-width: 0;
-    border-bottom-width: 1px;
+    border: 0;
+    border-bottom: 1px solid #000;
     width: 100%;
     padding: 0.5rem 0rem;
     font-size: 0.8rem;
