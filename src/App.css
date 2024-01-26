@@ -6,3 +6,13 @@
   margin: auto;
   height: 89vh;
 }
+
+.charts-wrapper {
+  display: flex;
+  justify-content: space-between;
+  height: auto;
+  width: 93%;
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow);
+  margin: 2rem;
+}

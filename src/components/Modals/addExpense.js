@@ -25,7 +25,7 @@ function AddExpense({ isExpenseModalVisible, handleExpenseCancel, onFinish }) {
             >
                 <Form.Item
                     style={{ fontWeight: 600 }}
-                    label="Name"
+                    label="Name of transaction"
                     name="name"
                     rules={[
                         {
@@ -57,6 +57,25 @@ function AddExpense({ isExpenseModalVisible, handleExpenseCancel, onFinish }) {
                 >
                     <DatePicker className='custom-input' format="YYYY-MM-DD" />
 
+                </Form.Item>
+
+                <Form.Item
+                    style={{ fontWeight: 600 }}
+                    label="Tag"
+                    name="tag"
+                    rules={[
+                        { required: true, message: "Please select a tag!" }
+                    ]}
+                >
+                    <Select className='select-input-2'>
+                        <Select.Option value="food">Food</Select.Option>
+                        <Select.Option value="education">Education</Select.Option>
+                        <Select.Option value="office">Office</Select.Option>
+                    </Select>
+
+                </Form.Item>
+                <Form.Item>
+                    <Button className='btn btn-blue' type='primary' htmlType='submit'>Add Expense</Button>
                 </Form.Item>
             </Form>
 
